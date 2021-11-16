@@ -1,5 +1,5 @@
 <template>
- <main class="w-screen h-screen px-10 flex flex-row min-h-screen justify-center items-center gap-x-10 text-center">
+ <main id="APOD" data-theme="" class="w-screen h-screen px-10 flex flex-row min-h-screen justify-center items-center gap-x-10 text-center">
   <!-- Box 1 -->
     <div class="flex flex-col flex-1 h-full">
       <div class="flex items-end pb-10 h-1/4">
@@ -14,16 +14,16 @@
         </div>
       </div>
       <hr>
-      <div class="h-4/6 mt-6">
-        <h2 v-if="date != null" class="text-right font-semibold mr-2"> Date: {{date}} </h2>
+      <div id="textarea" class="h-4/6 mt-6">
+        <h2 v-if="date != null" class="text-right bg-transparent font-semibold mr-2"> Date: {{date}} </h2>
         <h1 class="font-semibold underline text-xl mb-6 mt-2"> {{title}} </h1>
-        <textarea class="w-full h-5/6 leading-8 resize-none text-center overflow-x-hidden" :value="explanation" readonly >  </textarea>
+        <textarea class="w-full px-6 bg-transparent h-5/6 leading-8 resize-none text-center overflow-x-hidden" :value="explanation" readonly >  </textarea>
       </div>
     </div>
   <!-- Box 2 -->
     <div class="flex items-center justify-center flex-1 ">
       <div v-if="media_type == 'image'" class="image">
-        <img :src="media" style="max-height: 500px">  
+        <img @click="imgZoom()" :src="media" id="apod-img" style="max-height: 500px">  
       </div>
       <div v-else-if="media_type == 'video'" class="video">
         <iframe height="400" width="600" :src="media + '?controls=0&autoplay=1&rel=0&modestbranding=1' ">
@@ -31,12 +31,17 @@
       </div>
     </div>
   </main>
+  <div class="outer-img">
+    <div class="inner-img">
+      <!-- Here comes clone image -->
+    </div>
+  </div>
 </template>
 
 <script>
 // TODO: Title = 'Astronomy Picture Of the Day" & Footer 'API by NASA'
-// TODO: Dodati zoom opciju na slike
-// TODO: color theme opcija
+// TODO: Kada se menja view, neka ostane ista boja teme 
+
 export default {
  name: 'Apod',
   components: {
@@ -55,8 +60,17 @@ export default {
     }
   },
    methods: {    
-      changeDate() {
+    changeDate() {
       this.fetchData(this.date)
+    },
+    imgZoom(){
+      $('.inner-img').empty()
+      $('#apod-img').clone(true).appendTo('.inner-img');
+      $('.outer-img').toggleClass('show');
+      $('.outer-img').on('click', function(){
+        $(this).removeClass('show')
+        }
+      )
     },
     async fetchData(dateParam = '') {
       const API_KEY = 'oP2UeVMGk27XhgoWpy3S5Zwvfk30cipQa12eyjxC'
@@ -115,5 +129,36 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
   padding: 0;
   margin-left: 10px;
+}
+#apod-img {
+  cursor: pointer;
+}
+.outer-img{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height:100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  /* Hidden by default */
+  visibility: hidden;
+  opacity: 0;
+  transition: all ease-in-out 400ms;
+}
+.outer-img.show{
+  visibility: visible;
+  opacity: 1;
+}
+.inner-img{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.inner-img img{
+  margin: auto;
+  transform: scale(1.3);
+  height: auto;
+  max-width: 80%;
 }
 </style>
