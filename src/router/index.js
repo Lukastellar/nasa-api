@@ -1,8 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Apod from '../views/Apod.vue'
 import Calculator from '../views/Calculator.vue'
+import Welcome from '../components/Welcome.vue'
 
 const routes = [
+  {
+    path: '/',
+    name: 'Welcome',
+    component: Welcome
+  },
   {
     path: '/apod',
     name: 'Apod',

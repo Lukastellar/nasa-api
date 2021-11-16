@@ -1,6 +1,7 @@
 <template>
-  <nav id="nav" class="flex flex-col w-full justify-center items-center mt-3">
+  <nav id="nav" class="flex flex-col w-full justify-center items-center z-50 mt-3">
     <div class="routers mb-2">
+      <router-link to="/">Home</router-link>
       <router-link @click="navMenuToggle()" :class="{active: isActive}" to="/apod">apod</router-link>
       <router-link @click="navMenuToggle()" :class="{active: isActive}" to="/calculator">calc</router-link>
     </div>
@@ -28,7 +29,7 @@ export default {
   },
   methods: {
     changeTheme(id){
-      $('main').attr('data-theme', id)
+      $('#app').attr('data-theme', id)
     },
     navMenuToggle(){
       this.isActive = !this.isActive

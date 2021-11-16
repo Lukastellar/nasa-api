@@ -1,56 +1,64 @@
 
 #app{
-    
-    main {
-        transition: background-color ease-in-out 0.5s;
-    
-        #textarea,hr,p{
-            transition: all ease-in-out 0.5s; 
+    transition: all ease-in-out 0.5s;
+    &, #textarea, hr, p, :before, :after, h1{ transition: all ease-in-out 0.5s; }
+/* THEMES START */
+    /* THEME 1 */
+    &[data-theme="theme-1"]{
+        $color1: hsl(0, 0%, 12%);
+        $color2: hsl(0, 0%, 92%);
+        $color3: hsl(0, 0%, 50%);
+
+        background-color: $color1;
+        #nav{
+            a{ color: $color3}
+            a:not(:first-child):before{ background: hsl(0, 0%, 60%); }
+            a:hover:after,
+            a.router-link-active:after { 
+                background: $color2; 
+            }
+            a:hover,
+            a.router-link-active{
+                color: $color2; 
+            }
+        }
+        p, h1 { color: $color2; }
+        input[type=date] { background-color: $color2;}
+        #textarea { 
+            color: $color2; 
         }
         
-        /* THEMES */
-        &[data-theme="default"]{
-            $color1: hsl(0, 0%, 100%);
-            background-color: $color1;
-            input[type=date] { background-color: $color1;}
-    
-        }
-        &[data-theme="theme-1"]{
-            $color1: hsl(0, 0%, 12%);
-            $color2: hsl(0, 0%, 92%);
-            background-color: $color1;
-            p { color: $color2; }
-            input[type=date] { background-color: $color2;}
-            #textarea { 
-                color: $color2; 
-            }
-        }
-        &[data-theme="theme-2"]{
-            $color1: hsl(0, 87%, 62%);
-            $color2: hsl(0, 0%, 92%);
-            background-color: $color1;
-            p { color: $color2; }
-            input[type=date] { background-color: $color2; }
-            #textarea { 
-                color: $color2; 
-            }
-        }
-        &[data-theme="theme-3"]{
-            $color1: hsl(51, 100%, 65%);
-            $color2: hsl(0, 0%, 15%);
-            hr{ border-top: 1px solid $color2;}
-            background-color: $color1;
-            p { color: $color2; }
-            input[type=date] { 
-                background-color: hsl(0, 0%, 100%); }
-            #textarea { 
-                color: $color2;  
-            }
-        }
-        /* THEMES END */
     }
+
+    /* THEME 2 */
+    &[data-theme="theme-2"]{
+        $color1: hsl(0, 87%, 62%);
+        $color2: hsl(0, 0%, 92%);
+        background-color: $color1;
+        
+        p { color: $color2; }
+        input[type=date] { background-color: $color2; }
+        #textarea { 
+            color: $color2; 
+        }
+    }
+
+    /* THEME 3 */
+    &[data-theme="theme-3"]{
+        $color1: hsl(51, 100%, 65%);
+        $color2: hsl(0, 0%, 15%);
+
+        hr{ border-top: 1px solid $color2;}
+        background-color: $color1;
+        p { color: $color2; }
+        input[type=date] { 
+            background-color: hsl(0, 0%, 100%); }
+        #textarea { 
+            color: $color2;  
+        }
+    }
+/* THEMES END */
 }
-    
 
 .theme-options {
     padding-left: 5px;
@@ -103,7 +111,6 @@
     }
     a:hover:after,
     a.router-link-active:after {
-        color: black;
         background: black;
         transform: scaleX(1.1);
     }

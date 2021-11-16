@@ -1,5 +1,14 @@
 <template>
- <main id="APOD" data-theme="" class="w-screen h-screen px-10 flex flex-row min-h-screen justify-center items-center gap-x-10 text-center">
+<div class="title">
+    <h1>
+      <span> Astronomy </span>
+      <span> Picture </span>
+      <span> Of </span>
+      <span> the </span>
+      <span> Day </span>
+    </h1> 
+  </div>
+ <main id="APOD" class="w-screen h-screen px-10 flex flex-row min-h-screen justify-center items-center gap-x-10 text-center">
   <!-- Box 1 -->
     <div class="flex flex-col flex-1 h-full">
       <div class="flex items-end pb-10 h-1/4">
@@ -36,11 +45,14 @@
       <!-- Here comes clone image -->
     </div>
   </div>
+  <footer>
+    <div class="relative h-full flex justify-center items-center">
+      <p>API by <a target="_blank" href="https://api.nasa.gov/">NASA</a> </p>
+    </div>
+  </footer>
 </template>
 
 <script>
-// TODO: Title = 'Astronomy Picture Of the Day" & Footer 'API by NASA'
-// TODO: Kada se menja view, neka ostane ista boja teme 
 
 export default {
  name: 'Apod',
@@ -101,6 +113,28 @@ export default {
 </script>
 
 <style scoped>
+.title{
+  position: absolute;
+}
+.title > h1{
+  margin: 15px 0 0 20px;
+  width: 1rem;
+}
+.title > h1 > span{
+  display: block;
+  font-weight: bold;
+}
+.title > h1 > span:not(:nth-child(4))::first-letter{
+  margin-right: 1px;
+  border-radius: 2px;
+  color: black;
+  background-color: rgb(255, 139, 139);
+}
+.title > h1 > span:nth-child(4){
+  margin: -2px 0 -2px 4px;
+  font-weight: normal;
+  text-decoration: line-through;
+}
 button {
   background: white;
   border: 2px solid #555;
@@ -133,7 +167,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #apod-img {
   cursor: pointer;
 }
-.outer-img{
+.outer-img {
   position: fixed;
   top: 0;
   left: 0;
@@ -146,19 +180,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   transition: all ease-in-out 400ms;
 }
-.outer-img.show{
+.outer-img.show {
   visibility: visible;
   opacity: 1;
 }
-.inner-img{
+.inner-img {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
-.inner-img img{
+.inner-img img {
   margin: auto;
   transform: scale(1.3);
-  height: auto;
-  max-width: 80%;
+  height: 90vh;
+  max-height: 90%;
+  max-width: 90vw;
+}
+footer {
+  position: absolute;
+  width: 49vw;
+  height: 50px;
+  right: 0px;
+  bottom: 0px;
+  font-size: 13px;
+  font-weight: bold;
+  color: hsl(0, 0%, 21%);
+}
+footer p a{
+  font-style: italic;
+  text-decoration-line: underline;
 }
 </style>
