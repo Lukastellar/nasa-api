@@ -1,19 +1,2 @@
-# nasa-api
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<h1> Astronomy Picture Of the Day API </h1>
+<p> Get a picture of the day from a specific date. </p>
